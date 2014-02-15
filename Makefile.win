@@ -1,0 +1,52 @@
+# Project: CubicSpline
+# Compiler: Default GCC compiler
+# Compiler Type: MingW 3
+# Makefile created by wxDev-C++ IDE 7.4.2.569 on 07/03/13 17:55
+
+WXLIBNAME = wxmsw29u
+CPP       = g++.exe
+CC        = gcc.exe
+WINDRES   = "windres.exe"
+OBJ       = Objects/MingW/main.o Objects/MingW/dataclass.o Objects/MingW/cubicspline.o Objects/MingW/graph.o Objects/MingW/input.o
+LINKOBJ   = "Objects/MingW/main.o" "Objects/MingW/dataclass.o" "Objects/MingW/cubicspline.o" "Objects/MingW/graph.o" "Objects/MingW/input.o"
+LIBS      = -L"C:/Program Files (Leo)/Dev-Cpp/lib/wx/gcc_lib" -L"C:/Program Files (Leo)/Dev-Cpp/lib" -L"C:/Program Files (Leo)/Dev-Cpp/MinGW32/lib"  
+INCS      = -I"C:/Program Files (Leo)/Dev-Cpp/MinGW32/include"
+CXXINCS   = -I"C:/Program Files (Leo)/Dev-Cpp/MinGW32/include" -I"C:/Program Files (Leo)/Dev-Cpp/" -I"C:/Program Files (Leo)/Dev-Cpp/include/common"
+RCINCS    = --include-dir "C:/PROGRA~4/Dev-Cpp/include/common"
+BIN       = Output/MingW/CubicSpline.exe
+DEFINES   = 
+CXXFLAGS  = $(CXXINCS) $(DEFINES)  
+CFLAGS    = $(INCS) $(DEFINES)  
+GPROF     = gprof.exe
+ifeq ($(OS),Windows_NT)
+   RM = del /Q
+   FixPath = $(subst /,\,$1)
+else
+   RM = rm -f
+   FixPath = $1
+endif
+LINK      = g++.exe
+
+.PHONY: all all-before all-after clean clean-custom
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	$(RM) $(call FixPath,$(LINKOBJ)) "$(call FixPath,$(BIN))"
+
+$(BIN): $(OBJ)
+	$(LINK) $(LINKOBJ) -o "$(BIN)" $(LIBS) 
+
+Objects/MingW/main.o: $(GLOBALDEPS) main.cpp input.h dataclass.h cubicspline.h graph.h
+	$(CPP) -c main.cpp -o Objects/MingW/main.o $(CXXFLAGS)
+
+Objects/MingW/dataclass.o: $(GLOBALDEPS) dataclass.cpp dataclass.h
+	$(CPP) -c dataclass.cpp -o Objects/MingW/dataclass.o $(CXXFLAGS)
+
+Objects/MingW/cubicspline.o: $(GLOBALDEPS) cubicspline.cpp dataclass.h cubicspline.h
+	$(CPP) -c cubicspline.cpp -o Objects/MingW/cubicspline.o $(CXXFLAGS)
+
+Objects/MingW/graph.o: $(GLOBALDEPS) graph.cpp dataclass.h cubicspline.h
+	$(CPP) -c graph.cpp -o Objects/MingW/graph.o $(CXXFLAGS)
+
+Objects/MingW/input.o: $(GLOBALDEPS) input.cpp
+	$(CPP) -c input.cpp -o Objects/MingW/input.o $(CXXFLAGS)
